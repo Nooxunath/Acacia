@@ -1,0 +1,12 @@
+ErrorDocument 403 /acacia/view/error.php
+ErrorDocument 404 /acacia/view/error.php
+ErrorDocument 405 /acacia/view/error.php
+ErrorDocument 408 /acacia/view/error.php
+ErrorDocument 500 /acacia/view/error.php
+ErrorDocument 502 /acacia/view/error.php
+ErrorDocument 504 /acacia/view/error.php
+
+RewriteEngine On
+RewriteRule ^([^_]*)_([^_]*)\.html$ /acacia/?p=$1&a=$2 [L]
+RewriteRule ^([^_]*)_([^_]*)_([^_]*)\.html$ /acacia/?p=$1&a=$2&id=$3 [L]
+RewriteRule ^([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)\.html$ /acacia/?p=$1&a=$2&postid=$3&commentId=$4&vote=$5 [L]

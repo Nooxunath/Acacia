@@ -1,0 +1,117 @@
+@font-face {
+  font-family: 'limelight';
+  src: url('../webfonts/Limelight-Regular.ttf') format('truetype');
+}
+
+.limelight
+{
+  font-family: 'limelight', Arial, Helvetica, sans-serif;
+}
+
+.text-yellow
+{
+  color: rgb(222, 171, 106);
+}
+body
+{
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main
+{
+  flex: 1 0 auto;
+}
+
+/*Background image*//*Optimiser cette partie = 1 seul parallax et ensuite des background*/
+
+.parallax
+{
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    height: 770px;
+    min-height: 450px;
+}
+.para1
+{
+    background-image: url('../backgrounds/home-cover.jpg');
+}
+.para2
+{
+    background-size: contain;
+    background-image: url('../backgrounds/home-mini.jpg');
+}
+
+.nature
+{
+  font-size: 40px;
+  color: rgb(222, 171, 106);
+  margin-top: 20px;
+  margin-left: 70px;
+}
+/*Produit*/
+
+.btn
+{
+    border-radius: 5em;
+}
+
+/*Fiche produit*/
+
+.float-left
+{
+  margin: 0 10px 0 0;
+}
+.is_signaled
+{
+  background-color: #9E9E9E !important;
+  transition: background 0.3s;
+}
+
+.vote-form
+{
+  display: inline-block;
+}
+
+.legalNotice{
+  padding: 0 0 50px 0;
+}
+
+.footer-row{
+  margin-bottom:0;
+}
+
+
+/* RESPONSIVE */
+
+@media all and (max-width: 785px){
+  .page-title
+  {
+    font-size: 3em;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+.button-collapse
+{
+  color: rgb(222, 171, 106);
+}
+
+@media all and (max-width: 482px){
+  nav .brand-logo
+  {
+    font-size: 1.3em;
+  }
+
+  .page-title
+  {
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+    text-align: center;
+  }
+}
