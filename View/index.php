@@ -27,7 +27,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-lg-8 mx-auto">
-                <h2><a class="text-yellow text-decoration-none" href="<?=ROOT_URL?>blog_post_<?=$oPost->id?>.html"><?=htmlspecialchars($oPost->title)?></a></h2>
+                <h2><a class="text-yellow text-decoration-none limelight" href="<?=ROOT_URL?>blog_post_<?=$oPost->id?>.html"><?=htmlspecialchars($oPost->title)?></a></h2>
                 <p class="lead"><?= preg_replace("/<img[^>]+\>/i", "", nl2br(mb_strimwidth($oPost->body, 0, 700, '...'))); ?></p>
                 <button type="button" class="btn black"><a class="text-decoration-none white-text" href="<?=ROOT_URL?>blog_post_<?=$oPost->id?>.html">En voir plus</a></button>
               </div>
