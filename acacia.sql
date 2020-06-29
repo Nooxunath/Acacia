@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 28 juin 2020 à 12:16
--- Version du serveur :  8.0.18
--- Version de PHP :  7.3.12
+-- Hôte : 127.0.0.1
+-- Généré le : lun. 29 juin 2020 à 09:35
+-- Version du serveur :  10.4.11-MariaDB
+-- Version de PHP : 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `acacia`
+-- Base de données : `acacia`
 --
 
 -- --------------------------------------------------------
@@ -28,25 +27,27 @@ SET time_zone = "+00:00";
 -- Structure de la table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
-CREATE TABLE IF NOT EXISTS `comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `comment` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `comment` text CHARACTER SET utf8 NOT NULL,
   `post_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
-  `seen` tinyint(11) NOT NULL DEFAULT '0',
-  `signals` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=97 DEFAULT CHARSET=latin1;
+  `seen` tinyint(11) NOT NULL DEFAULT 0,
+  `signals` int(11) NOT NULL DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `comments`
 --
 
 INSERT INTO `comments` (`id`, `user_id`, `comment`, `post_id`, `date`, `seen`, `signals`) VALUES
-(93, 14, 'Pas mal !', 40, '2018-02-22 07:20:01', 0, 0),
-(94, 14, 'Bof', 11, '2018-02-22 07:20:13', 0, 0);
+(102, 15, 'Alors la, j\'y crois encore difficilement, c\'était juste divin.', 40, '2020-06-29 09:34:03', 0, 0),
+(97, 14, 'Délicieux j\'ai adoré passer chez vous !', 11, '2020-06-29 09:27:11', 0, 0),
+(98, 14, 'Mon dieu je tuerais pour en remanger !', 24, '2020-06-29 09:27:37', 0, 0),
+(99, 14, 'J\'ai vu la lumière.', 40, '2020-06-29 09:28:38', 0, 0),
+(100, 14, 'Sublime, vraiment.', 45, '2020-06-29 09:28:57', 0, 0),
+(101, 14, 'C\'est comme si j\'avais dieu dans ma bouche ', 45, '2020-06-29 09:29:55', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -54,15 +55,13 @@ INSERT INTO `comments` (`id`, `user_id`, `comment`, `post_id`, `date`, `seen`, `
 -- Structure de la table `posts`
 --
 
-DROP TABLE IF EXISTS `posts`;
-CREATE TABLE IF NOT EXISTS `posts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `posts` (
+  `id` int(10) UNSIGNED NOT NULL,
   `title` varchar(50) DEFAULT NULL,
   `body` longtext NOT NULL,
   `image` varchar(255) NOT NULL DEFAULT 'post.png',
-  `createdDate` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+  `createdDate` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `posts`
@@ -80,15 +79,13 @@ INSERT INTO `posts` (`id`, `title`, `body`, `image`, `createdDate`) VALUES
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(120) NOT NULL,
   `password` char(60) NOT NULL,
   `admin` int(11) DEFAULT NULL,
-  `pseudo` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `pseudo` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
@@ -96,7 +93,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `admin`, `pseudo`) VALUES
 (8, 'test@test.com', '21e57080434c1cb6c2fb4753c4f8a28f', 0, 'Romain'),
-(14, 'tom@gmail.com', '21e57080434c1cb6c2fb4753c4f8a28f', NULL, 'Tom');
+(14, 'tom@gmail.com', '21e57080434c1cb6c2fb4753c4f8a28f', NULL, 'Tom'),
+(15, 'marvin@test.com', '21e57080434c1cb6c2fb4753c4f8a28f', 0, 'Marvin'),
+(16, 'choco@test.com', '21e57080434c1cb6c2fb4753c4f8a28f', 0, 'choco');
 
 -- --------------------------------------------------------
 
@@ -104,15 +103,69 @@ INSERT INTO `users` (`id`, `email`, `password`, `admin`, `pseudo`) VALUES
 -- Structure de la table `votes`
 --
 
-DROP TABLE IF EXISTS `votes`;
-CREATE TABLE IF NOT EXISTS `votes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `votes` (
+  `id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
-  `user_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `user_id` varchar(50) CHARACTER SET utf8 NOT NULL,
   `post_id` int(11) NOT NULL,
-  `vote` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=136 DEFAULT CHARSET=latin1;
+  `vote` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+
+--
+-- AUTO_INCREMENT pour la table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT pour la table `votes`
+--
+ALTER TABLE `votes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
